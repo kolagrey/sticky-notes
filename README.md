@@ -12,7 +12,6 @@
     - StickyNotes - dumb component that renders all sticky notes using StickyNote component
     - StickyNote - component handle most stick note functionality
 
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -34,6 +33,17 @@ Launches the test runner in the interactive watch mode.\
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## How to use the App
+### How to create a note
+- Select note color from the select input (just three colors for now)
+- Click on the Create Note button
+- Click anywhere on the screen to create note at that spot
+- Start writing
+
+### How to delete a note
+- Select a note to make it active
+- Click on the Delete Active Note button to delete the note
 
 ### TODO
 - Drag and Drop to delete feature (currently has a delete button for deleting active notes)
+- Saving and retrieving notes
