@@ -10,8 +10,8 @@ function StickyNote({
   const editableNoteRef = useRef(null);
 
   const isResizing = useRef(false);
-  const currentX = useRef(300);
-  const currentY = useRef(50);
+  const currentX = useRef(null);
+  const currentY = useRef(null);
 
   const onStickyNoteMouseDown = (e) => {
     if (isResizing.current) return;
@@ -43,7 +43,7 @@ function StickyNote({
     window.addEventListener('mouseup', winMouseUp);
   };
 
-  const resizerMouseDown = (e, target) => {
+  const resizerMouseDown = (e, resizer) => {
     isResizing.current = true;
     currentX.current = e.clientX;
     currentY.current = e.clientY;
@@ -64,14 +64,14 @@ function StickyNote({
       const { top, left, width, height } =
         stickyNoteRef.current.getBoundingClientRect();
 
-      if (target === 'se') {
+      if (resizer === 'se') {
         stickyNoteRef.current.style.width = `${
           width - (currentX.current - e.clientX)
         }px`;
         stickyNoteRef.current.style.height = `${
           height - (currentY.current - e.clientY)
         }px`;
-      } else if (target === 'sw') {
+      } else if (resizer === 'sw') {
         stickyNoteRef.current.style.width = `${
           width + (currentX.current - e.clientX)
         }px`;
@@ -81,7 +81,7 @@ function StickyNote({
         stickyNoteRef.current.style.left = `${
           left - (currentX.current - e.clientX)
         }px`;
-      } else if (target === 'ne') {
+      } else if (resizer === 'ne') {
         stickyNoteRef.current.style.width = `${
           width - (currentX.current - e.clientX)
         }px`;
