@@ -44,6 +44,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 - Select a note to make it active
 - Click on the Delete Active Note button to delete the note
 
+### Current Features
+- Create new note
+- Expand note by dragging
+- Move note by dragging
+- Delete note (Todo: Follow spec)
 ### TODO
 - Drag and Drop to delete feature (currently has a delete button for deleting active notes)
 - Saving and retrieving notes
