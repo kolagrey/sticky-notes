@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const NoteMenu = ({
   onCreateNote,
@@ -46,6 +47,13 @@ const NoteMenu = ({
       </div>
     </div>
   );
+};
+
+NoteMenu.propTypes = {
+  onCreateNote: PropTypes.func,
+  onColorSelect: PropTypes.func,
+  isButtonDisabled: PropTypes.bool,
+  onDeleteNote: PropTypes.func
 };
 
 export default NoteMenu;

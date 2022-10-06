@@ -1,5 +1,5 @@
-import React, { memo, useRef } from 'react';
-
+import React, { memo, useRef } from "react";
+import PropTypes from "prop-types";
 function StickyNote({
   stickyNote: { id, content, style },
   currentFocus,
@@ -20,8 +20,8 @@ function StickyNote({
 
     const winMouseUp = () => {
       setNoteFocus();
-      window.removeEventListener('mousemove', winMouseMove);
-      window.removeEventListener('mouseup', winMouseUp);
+      window.removeEventListener("mousemove", winMouseMove);
+      window.removeEventListener("mouseup", winMouseUp);
     };
 
     const winMouseMove = (e) => {
@@ -29,8 +29,8 @@ function StickyNote({
       const newY = currentY.current - e.clientY;
 
       const { top, left } = stickyNoteRef.current.getBoundingClientRect();
-      const newLeft = left - newX + 'px';
-      const newTop = top - newY + 'px';
+      const newLeft = left - newX + "px";
+      const newTop = top - newY + "px";
 
       stickyNoteRef.current.style.left = newLeft;
       stickyNoteRef.current.style.top = newTop;
@@ -39,24 +39,24 @@ function StickyNote({
       currentY.current = e.clientY;
     };
 
-    window.addEventListener('mousemove', winMouseMove);
-    window.addEventListener('mouseup', winMouseUp);
+    window.addEventListener("mousemove", winMouseMove);
+    window.addEventListener("mouseup", winMouseUp);
   };
 
   const resizerMouseDown = (e, resizer) => {
     isResizing.current = true;
     currentX.current = e.clientX;
     currentY.current = e.clientY;
-    window.addEventListener('mousemove', winMouseMove);
-    window.addEventListener('mouseup', winMouseUp);
+    window.addEventListener("mousemove", winMouseMove);
+    window.addEventListener("mouseup", winMouseUp);
 
     function winMouseMove(e) {
       if (
         parseInt(stickyNoteRef.current.style.width) < 50 ||
         parseInt(stickyNoteRef.current.style.height) < 50
       ) {
-        stickyNoteRef.current.style.width = '160px';
-        stickyNoteRef.current.style.height = '160px';
+        stickyNoteRef.current.style.width = "160px";
+        stickyNoteRef.current.style.height = "160px";
         editableNoteRef.current.style.width = stickyNoteRef.current.style.width;
         editableNoteRef.current.style.height =
           stickyNoteRef.current.style.height;
@@ -64,14 +64,14 @@ function StickyNote({
       const { top, left, width, height } =
         stickyNoteRef.current.getBoundingClientRect();
 
-      if (resizer === 'se') {
+      if (resizer === "se") {
         stickyNoteRef.current.style.width = `${
           width - (currentX.current - e.clientX)
         }px`;
         stickyNoteRef.current.style.height = `${
           height - (currentY.current - e.clientY)
         }px`;
-      } else if (resizer === 'sw') {
+      } else if (resizer === "sw") {
         stickyNoteRef.current.style.width = `${
           width + (currentX.current - e.clientX)
         }px`;
@@ -81,7 +81,7 @@ function StickyNote({
         stickyNoteRef.current.style.left = `${
           left - (currentX.current - e.clientX)
         }px`;
-      } else if (resizer === 'ne') {
+      } else if (resizer === "ne") {
         stickyNoteRef.current.style.width = `${
           width - (currentX.current - e.clientX)
         }px`;
@@ -115,8 +115,8 @@ function StickyNote({
 
     function winMouseUp() {
       setNoteFocus();
-      window.removeEventListener('mousemove', winMouseMove);
-      window.removeEventListener('mouseup', winMouseUp);
+      window.removeEventListener("mousemove", winMouseMove);
+      window.removeEventListener("mouseup", winMouseUp);
       isResizing.current = false;
     }
   };
@@ -139,29 +139,36 @@ function StickyNote({
         <div
           className="editable-area"
           style={{ height: style.height, width: style.width }}
-          contentEditable={'true'}
+          contentEditable={"true"}
           ref={editableNoteRef}
           dangerouslySetInnerHTML={{ __html: content }}
         ></div>
       </div>
       <div
         className="resizer nw"
-        onMouseDown={(e) => resizerMouseDown(e, 'nw')}
+        onMouseDown={(e) => resizerMouseDown(e, "nw")}
       ></div>
       <div
         className="resizer ne"
-        onMouseDown={(e) => resizerMouseDown(e, 'ne')}
+        onMouseDown={(e) => resizerMouseDown(e, "ne")}
       ></div>
       <div
         className="resizer se"
-        onMouseDown={(e) => resizerMouseDown(e, 'se')}
+        onMouseDown={(e) => resizerMouseDown(e, "se")}
       ></div>
       <div
         className="resizer sw"
-        onMouseDown={(e) => resizerMouseDown(e, 'sw')}
+        onMouseDown={(e) => resizerMouseDown(e, "sw")}
       ></div>
     </div>
   );
 }
+
+StickyNote.propTypes = {
+  stickyNote: PropTypes.object,
+  currentFocus: PropTypes.number,
+  setCurrentFocus: PropTypes.func,
+  setActiveNote: PropTypes.func,
+};
 
 export default memo(StickyNote);

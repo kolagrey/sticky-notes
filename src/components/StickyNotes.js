@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from "prop-types";
 import StickyNote from './StickyNote';
 
 const StickyNotes = ({
@@ -20,6 +21,13 @@ const StickyNotes = ({
       ))}
     </React.Fragment>
   );
+};
+
+StickyNotes.propTypes = {
+  stickyNotes: PropTypes.array,
+  setCurrentFocus: PropTypes.func,
+  focusValue: PropTypes.number,
+  setActiveNote: PropTypes.func,
 };
 
 export default memo(StickyNotes);
