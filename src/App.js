@@ -54,7 +54,7 @@ export default function App() {
     setColor(e.target.value);
   };
 
-  const setCurrentFocus = (value) => {
+  const onSetCurrentFocus = (value) => {
     setFocusValue(value);
   };
 
@@ -68,7 +68,7 @@ export default function App() {
       />
       <StickyNotes
         stickyNotes={stickyNotes}
-        setCurrentFocus={setCurrentFocus}
+        setCurrentFocus={onSetCurrentFocus}
         focusValue={focusValue}
         setActiveNote={setActiveNote}
       />
